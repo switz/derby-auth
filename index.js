@@ -134,7 +134,7 @@ function setupMiddleware(strategies, options) {
                     _fetchUser(q, model, function(err, userObj){
                         if (err && !err.notFound) return done(err);
 
-                        if /Facebook/i.test(profile.provider)
+                        if (/Facebook/i.test(profile.provider))
                             sess.accessToken = accessToken
 
                         // User exists, but hasn't yet been associated with social network
