@@ -134,8 +134,17 @@ function setupMiddleware(strategies, options) {
                     _fetchUser(q, model, function(err, userObj){
                         if (err && !err.notFound) return done(err);
 
-                        if (/Facebook/i.test(profile.provider))
-                            sess.accessToken = accessToken
+                        // TEMPORARY: Extend for other networks
+                        // This won't work if the user unauths their account
+                        // and then reauths
+                        if (/facebook/i.test(profile.provider)) {
+                            profile.accessToken = accessToken;
+                            profile.refreshToken = refreshToken;
+                        }
+                        else if ((/twitter/i).test(profile.provider)) {
+                            profile.token = accessToken;
+                            profile.tokenSecret = refreshToken;
+                        }
 
                         // User exists, but hasn't yet been associated with social network
                         if(err && err.notFound) {
