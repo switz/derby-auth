@@ -138,8 +138,7 @@ function setupMiddleware(strategies, options) {
                         // This won't work if the user unauths their account
                         // and then reauths
                         if (/facebook/i.test(profile.provider)) {
-                            profile.accessToken = accessToken;
-                            profile.refreshToken = refreshToken;
+                            profile.token = accessToken;
                         }
                         else if ((/twitter/i).test(profile.provider)) {
                             profile.token = accessToken;
